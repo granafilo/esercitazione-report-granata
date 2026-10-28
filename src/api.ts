@@ -2,6 +2,7 @@ import type { TypeCarts, TypeProduct, TypeUser } from "./types.ts";
 
 const FAKESTORE_URL = "https://fakestoreapi.com";
 
+/* Recupero tutti i carrelli */
 export const getCarts = async (): Promise<TypeCarts> => {
   try {
     const response = await fetch(`${FAKESTORE_URL}/carts`);
@@ -15,6 +16,7 @@ export const getCarts = async (): Promise<TypeCarts> => {
   }
 };
 
+/* Recupero un utente partendo dall'Id */
 export const getUser = async <T>(value: T): Promise<TypeUser | null> => {
   try {
     const response = await fetch(`${FAKESTORE_URL}/users/${value}`);
@@ -28,6 +30,7 @@ export const getUser = async <T>(value: T): Promise<TypeUser | null> => {
   }
 };
 
+/* Recupero tutti gli utenti */
 export const getUsers = async (): Promise<TypeUser[]> => {
   try {
     const response = await fetch(`${FAKESTORE_URL}/users`);
@@ -41,6 +44,7 @@ export const getUsers = async (): Promise<TypeUser[]> => {
   }
 };
 
+/* Recupero tutti i prodotti */
 export const getProducts = async (): Promise<TypeProduct[]> => {
   try {
     const response = await fetch(`${FAKESTORE_URL}/products`);

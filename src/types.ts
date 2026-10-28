@@ -2,11 +2,13 @@ export type TypeProductId = number;
 export type TypeUnitsSold = number;
 export type TypeUserId = number;
 
+/* Prodotto dentro al carrello */
 export type TypeCartProduct = {
   productId: TypeProductId;
   quantity: TypeUnitsSold;
 };
 
+/* Carrello di un utente */
 export type TypeUserCart = {
   id: number;
   userId: TypeUserId;
@@ -15,13 +17,16 @@ export type TypeUserCart = {
   __v?: unknown;
 };
 
+/* Array di carrelli utente */
 export type TypeCarts = TypeUserCart[];
 
+/* Tipo per l'oggetto della geolocalizzazione */
 export type TypeGeolocation = {
   lat: string;
   long: string;
 };
 
+/* Tipo dell'indirizzo */
 export type TypeAddress = {
   geolocation: TypeGeolocation;
   city: string;
@@ -30,11 +35,13 @@ export type TypeAddress = {
   zipcode: string;
 };
 
+/* Tipo nome user */
 export type TypeName = {
   firstname: string;
   lastname: string;
 };
 
+/* Tipo utente */
 export type TypeUser = {
   address: TypeAddress;
   id: TypeUserId;
@@ -45,12 +52,13 @@ export type TypeUser = {
   phone: string;
   __v?: unknown;
 };
-
+/* Tipo per la valutazione di un prodotto */
 export type TypeRating = {
   rate: number;
   count: number;
 };
 
+/* Tipo prodotto del catalogo */
 export type TypeProduct = {
   id: number;
   title: string;
@@ -61,6 +69,7 @@ export type TypeProduct = {
   rating?: TypeRating;
 };
 
+/* Tipo prodotto `classificato` */
 export type TypeRankedProduct = {
   rank: number;
   productId: TypeProductId;
@@ -71,17 +80,20 @@ export type TypeRankedProduct = {
   revenue: number;
 };
 
+/* Tipo timespan */
 export type TypePeriodDateRange = {
   start: string;
   end: string;
 };
 
+/* Tipo per il periodo dei prodotti */
 export type TypeProductReportPeriod = {
   period: "all_time" | "last_month";
   dateRange: TypePeriodDateRange | null;
   items: TypeRankedProduct[];
 };
 
+/* Tipo per il report dei prodotti  */
 export type TypeProductReport = {
   reportId: string;
   title: string;
@@ -93,6 +105,7 @@ export type TypeProductReport = {
   };
 };
 
+/* Tipo per un user classificato */
 export type TypeRankedCustomer = {
   rank: number;
   userId: TypeUserId;
@@ -104,12 +117,14 @@ export type TypeRankedCustomer = {
   totalSpent: number;
 };
 
+/* Tipo per il periodo del report user  */
 export type TypeCustomerReportPeriod = {
   period: "all_time" | "last_month";
   dateRange: TypePeriodDateRange | null;
   items: TypeRankedCustomer[];
 };
 
+/* Tipo per il report sugli utenti */
 export type TypeCustomerReport = {
   reportId: string;
   title: string;

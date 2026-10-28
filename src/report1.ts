@@ -15,11 +15,13 @@ import {
   isDateInRange,
 } from "./utils.ts";
 
+/* Prodotto [ID]: Quantità vendute [in aggiornamento] */
 type AggregatedProductSales = {
   productId: TypeProductId;
   unitsSold: TypeUnitsSold;
 };
 
+/* Metodo che parte da tutti i carrelli e crea un array formato da un {{ AggregatedProductSales }} per ogni prodotto univoco */
 const aggregateProductSales = (carts: TypeCarts): AggregatedProductSales[] => {
   const salesMap = new Map<TypeProductId, TypeUnitsSold>();
 
@@ -34,14 +36,15 @@ const aggregateProductSales = (carts: TypeCarts): AggregatedProductSales[] => {
     ([productId, unitsSold]: [TypeProductId, TypeUnitsSold]) => ({
       productId,
       unitsSold,
-    })
+    }),
   );
 };
 
+/* Restituisce i primi 3 prodotti per unità vendute [se uguali primo per id] */
 const rankTopProducts = (
   sales: AggregatedProductSales[],
   products: TypeProduct[],
-  limit: number = 3
+  limit: number = 3,
 ): TypeRankedProduct[] => {
   return sales
     .sort((a, b) => {
@@ -69,15 +72,16 @@ const rankTopProducts = (
     });
 };
 
+/* Metodo finale per generare oggetto completo del report */
 export const generateReport1 = (
   carts: TypeCarts,
-  products: TypeProduct[]
+  products: TypeProduct[],
 ): TypeProductReport => {
   const anchorDate = getMostRecentCartDate(carts);
   const lastMonthRange = getLastMonthRange(anchorDate, 30);
 
   const lastMonthCarts = carts.filter((c) =>
-    isDateInRange(c.date, lastMonthRange.start, lastMonthRange.end)
+    isDateInRange(c.date, lastMonthRange.start, lastMonthRange.end),
   );
 
   const allTimeSales = aggregateProductSales(carts);

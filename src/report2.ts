@@ -17,6 +17,7 @@ import {
   roundToTwoDecimals,
 } from "./utils.ts";
 
+/* Tipo che unisce utente + n. ordini + n. prodotti comprati + spesa totale*/
 type AggregatedCustomerPurchases = {
   userId: TypeUserId;
   totalOrders: number;
@@ -24,9 +25,10 @@ type AggregatedCustomerPurchases = {
   totalSpent: number;
 };
 
+/* Metodo che parte da tutti i carrelli e crea un array formato da un {{ AggregatedCustomerPurchases }} per ogni utente */
 const aggregateCustomerPurchases = (
   carts: TypeCarts,
-  products: TypeProduct[]
+  products: TypeProduct[],
 ): AggregatedCustomerPurchases[] => {
   const purchasesMap = new Map<TypeUserId, AggregatedCustomerPurchases>();
 
@@ -58,10 +60,11 @@ const aggregateCustomerPurchases = (
   }));
 };
 
+/* Restituisce i primi 3 utenti per spesa totale [se uguali primo per id] */
 const rankTopCustomers = (
   purchases: AggregatedCustomerPurchases[],
   users: TypeUser[],
-  limit: number = 3
+  limit: number = 3,
 ): TypeRankedCustomer[] => {
   return purchases
     .sort((a, b) => {
@@ -93,22 +96,23 @@ const rankTopCustomers = (
     });
 };
 
+/* Metodo finale per generare oggetto completo del report */
 export const generateReport2 = (
   carts: TypeCarts,
   products: TypeProduct[],
-  users: TypeUser[]
+  users: TypeUser[],
 ): TypeCustomerReport => {
   const anchorDate = getMostRecentCartDate(carts);
   const lastMonthRange = getLastMonthRange(anchorDate, 30);
 
   const lastMonthCarts = carts.filter((c) =>
-    isDateInRange(c.date, lastMonthRange.start, lastMonthRange.end)
+    isDateInRange(c.date, lastMonthRange.start, lastMonthRange.end),
   );
 
   const allTimePurchases = aggregateCustomerPurchases(carts, products);
   const lastMonthPurchases = aggregateCustomerPurchases(
     lastMonthCarts,
-    products
+    products,
   );
 
   return {
@@ -133,4 +137,3 @@ export const generateReport2 = (
     },
   };
 };
-
