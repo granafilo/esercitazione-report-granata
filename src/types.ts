@@ -1,5 +1,6 @@
 export type TypeProductId = number;
 export type TypeUnitsSold = number;
+export type TypeUserId = number;
 
 export type TypeCartProduct = {
   productId: TypeProductId;
@@ -8,7 +9,7 @@ export type TypeCartProduct = {
 
 export type TypeUserCart = {
   id: number;
-  userId: number;
+  userId: TypeUserId;
   date: string;
   products: TypeCartProduct[];
   __v?: unknown;
@@ -36,7 +37,7 @@ export type TypeName = {
 
 export type TypeUser = {
   address: TypeAddress;
-  id: number;
+  id: TypeUserId;
   email: string;
   username: string;
   password?: string;
@@ -89,5 +90,33 @@ export type TypeProductReport = {
   periods: {
     allTime: TypeProductReportPeriod;
     lastMonth: TypeProductReportPeriod;
+  };
+};
+
+export type TypeRankedCustomer = {
+  rank: number;
+  userId: TypeUserId;
+  username: string;
+  fullName: string;
+  email: string;
+  totalOrders: number;
+  totalUnitsPurchased: number;
+  totalSpent: number;
+};
+
+export type TypeCustomerReportPeriod = {
+  period: "all_time" | "last_month";
+  dateRange: TypePeriodDateRange | null;
+  items: TypeRankedCustomer[];
+};
+
+export type TypeCustomerReport = {
+  reportId: string;
+  title: string;
+  generatedAt: string;
+  anchorDate: string;
+  periods: {
+    allTime: TypeCustomerReportPeriod;
+    lastMonth: TypeCustomerReportPeriod;
   };
 };
