@@ -1,10 +1,10 @@
 import type { TypeCarts, TypeProduct, TypeUser } from "./types.ts";
 
-const BASE_URL = "https://fakestoreapi.com";
+const FAKESTORE_URL = "https://fakestoreapi.com";
 
 export const getCarts = async (): Promise<TypeCarts> => {
   try {
-    const response = await fetch(`${BASE_URL}/carts`);
+    const response = await fetch(`${FAKESTORE_URL}/carts`);
     if (response.status === 200) {
       return await response.json();
     }
@@ -17,7 +17,7 @@ export const getCarts = async (): Promise<TypeCarts> => {
 
 export const getUser = async <T>(value: T): Promise<TypeUser | null> => {
   try {
-    const response = await fetch(`${BASE_URL}/users/${value}`);
+    const response = await fetch(`${FAKESTORE_URL}/users/${value}`);
     if (response.status === 200) {
       return await response.json();
     }
@@ -30,7 +30,7 @@ export const getUser = async <T>(value: T): Promise<TypeUser | null> => {
 
 export const getUsers = async (): Promise<TypeUser[]> => {
   try {
-    const response = await fetch(`${BASE_URL}/users`);
+    const response = await fetch(`${FAKESTORE_URL}/users`);
     if (response.status === 200) {
       return await response.json();
     }
@@ -43,7 +43,7 @@ export const getUsers = async (): Promise<TypeUser[]> => {
 
 export const getProducts = async (): Promise<TypeProduct[]> => {
   try {
-    const response = await fetch(`${BASE_URL}/products`);
+    const response = await fetch(`${FAKESTORE_URL}/products`);
     if (response.status === 200) {
       return await response.json();
     }
