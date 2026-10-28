@@ -1,4 +1,11 @@
-import type { TypeCarts, TypeProduct } from "./types.ts";
+import type {
+  TypeCarts,
+  TypeName,
+  TypeProduct,
+  TypeProductId,
+  TypeUser,
+  TypeUserId,
+} from "./types.ts";
 
 export const formatPrice = (importo: number): string => {
   return importo.toFixed(2);
@@ -13,10 +20,22 @@ export const calculateRevenue = (unitPrice: number, quantity: number): number =>
 };
 
 export const findProductById = (
-  productId: number,
+  productId: TypeProductId,
   products: TypeProduct[]
 ): TypeProduct | undefined => {
   return products.find((p) => p.id === productId);
+};
+
+export const findUserById = (
+  userId: TypeUserId,
+  users: TypeUser[]
+): TypeUser | undefined => {
+  return users.find((u) => u.id === userId);
+};
+
+export const formatFullName = (name?: TypeName): string => {
+  if (!name) return "Utente sconosciuto";
+  return `${name.firstname} ${name.lastname}`.trim();
 };
 
 export const getMostRecentCartDate = (carts: TypeCarts): Date => {
