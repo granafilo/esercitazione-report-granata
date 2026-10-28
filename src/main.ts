@@ -1,15 +1,20 @@
-import { getCarts, getProducts } from "./api.ts";
+import { getCarts, getProducts, getUsers } from "./api.ts";
 import { generateReport1 } from "./report1.ts";
+import { generateReport2 } from "./report2.ts";
 
 const main = async () => {
   try {
-    const [carts, products] = await Promise.all([
+    const [carts, products, users] = await Promise.all([
       getCarts(),
       getProducts(),
+      getUsers(),
     ]);
 
     const report1 = generateReport1(carts, products);
+    const report2 = generateReport2(carts, products, users);
+
     console.log(JSON.stringify(report1, null, 2));
+    console.log(JSON.stringify(report2, null, 2));
   } catch (error: unknown) {
     if (error instanceof Error) {
       console.error(error.message);
